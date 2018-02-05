@@ -1,0 +1,12 @@
+{
+  "name": "jship8",
+  "version": "1.0.0",
+  "description": "CHIP-8 JS emulator",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "author": "Fiaxhs",
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}

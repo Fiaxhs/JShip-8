@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSHIP8</title>
+	<style type="text/css">
+		.screen {
+			width: 640px;
+			height: 320px;
+			margin: 20px auto;
+			border: 1px solid black;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			background-color: black;
+		}
+		.screen div {
+			flex-basis: 10px;
+			height: 10px;
+		}
+		.black {
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<div id="canvas" class="screen"></div>
+	<div id="stack"></div>
+	<p align="center">
+		<select onchange="loadRom(this.value);">
+			<option value="">Pick a rom</option>
+			<option value="Maze (alt) [David Winter, 199x].ch8">Maze (alt) [David Winter, 199x].ch8</option>
+			<option value="Maze [David Winter, 199x].ch8">Maze [David Winter, 199x].ch8</option>
+			<option value="Particle Demo [zeroZshadow, 2008].ch8">Particle Demo [zeroZshadow, 2008].ch8</option>
+			<option value="Sierpinski [Sergey Naydenov, 2010].ch8">Sierpinski [Sergey Naydenov, 2010].ch8</option>
+			<option value="Sirpinski [Sergey Naydenov, 2010].ch8">Sirpinski [Sergey Naydenov, 2010].ch8</option>
+			<option value="Stars [Sergey Naydenov, 2010].ch8">Stars [Sergey Naydenov, 2010].ch8</option>
+			<option value="Trip8 Demo (2008) [Revival Studios].ch8">Trip8 Demo (2008) [Revival Studios].ch8</option>
+			<option value="Zero Demo [zeroZshadow, 2007].ch8">Zero Demo [zeroZshadow, 2007].ch8</option>
+		</select>
+	<script src="./lib/main.js"></script>
+</body>
+</html>
