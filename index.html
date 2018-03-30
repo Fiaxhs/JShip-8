@@ -3,38 +3,182 @@
 <head>
 	<title>JSHIP8</title>
 	<style type="text/css">
+		html, body {
+			font-family: Helvetica, Arial;
+			background-color: #56575d;
+			margin-top: 40px;
+		}
+		.colactron {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 		.screen {
 			width: 640px;
 			height: 320px;
-			margin: 20px auto;
+			margin: 40px;
 			border: 1px solid black;
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: row;
 			background-color: black;
+			box-shadow: #777 0px 0px 30px;
+			border: 7px solid black;
 		}
 		.screen div {
-			flex-basis: 10px;
-			height: 10px;
+			flex-basis: 9px;
+			height: 9px;
+			border-width: 1px 1px 0 0;
+			border-color: #000;
+			border-style: solid;
 		}
 		.black {
 			background-color: white;
 		}
+		.keypad {
+			width: 240px;
+			height: 240px;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin: 10px;
+		}
+		.key {
+			position: relative;
+			width: 50px;
+			height: 50px;
+			text-align: center;
+			display: inline-flex;
+			border-radius: 3px;
+			justify-content: center;
+			align-items: center;
+			color: #666;
+			margin: 5px;
+			background: #eff0f2;
+			border-radius: 4px;
+			border-top: 1px solid #ccc;
+			box-shadow:
+				inset 0 0 25px #e8e8e8,
+				0 1px 0 #c3c3c3,
+				0 2px 0 #c9c9c9,
+				0 2px 3px #333;
+			text-shadow: 0px 1px 0px #f5f5f5;
+			cursor: pointer;
+		}
+
+		.key-pressed {
+			background: #ebeced;
+			margin: 7px 5px 3px;
+			color: #222;
+			box-shadow:
+				inset 0 0 25px #ddd,
+				0 0 3px #333;
+			border-top: 1px solid #eee;
+		}
+
+		.key .actual-key {
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			font-size: 11px;
+			color: #444;
+		}
+
+		#speaker {
+			visibility: hidden;
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
-	<div id="canvas" class="screen"></div>
-	<div id="stack"></div>
+	<div class="colactron">
+		<div id="canvas" class="screen"></div>
+		<div class="keypad" id="keypad">
+			<div class="key" id="key_1">
+				1 <span class="actual-key">1</span>
+			</div>
+			<div class="key" id="key_2">
+				2 <span class="actual-key">2</span>
+			</div>
+			<div class="key" id="key_3">
+				3 <span class="actual-key">3</span>
+			</div>
+			<div class="key" id="key_4">
+				C <span class="actual-key">4</span>
+			</div>
+			<div class="key" id="key_q">
+				4 <span class="actual-key">q</span>
+			</div>
+			<div class="key" id="key_w">
+				5 <span class="actual-key">w</span>
+			</div>
+			<div class="key" id="key_e">
+				6 <span class="actual-key">e</span>
+			</div>
+			<div class="key" id="key_r">
+				D <span class="actual-key">r</span>
+			</div>
+			<div class="key" id="key_a">
+				7 <span class="actual-key">a</span>
+			</div>
+			<div class="key" id="key_s">
+				8 <span class="actual-key">s</span>
+			</div>
+			<div class="key" id="key_d">
+				9 <span class="actual-key">d</span>
+			</div>
+			<div class="key" id="key_f">
+				E <span class="actual-key">f</span>
+			</div>
+			<div class="key" id="key_z">
+				A <span class="actual-key">z</span>
+			</div>
+			<div class="key" id="key_x">
+				0 <span class="actual-key">x</span>
+			</div>
+			<div class="key" id="key_c">
+				B <span class="actual-key">c</span>
+			</div>
+			<div class="key" id="key_v">
+				F <span class="actual-key">v</span>
+			</div>
+		</div>
+	</div>
+	<h2 id="speaker">BEEP</h2>
 	<p align="center">
-		<select onchange="loadRom(this.value);">
+		<select onchange="loadRom(this.value); this.blur();">
 			<option value="">Pick a rom</option>
+			<option value="15PUZZLE">15PUZZLE</option>
+			<option value="BLINKY">BLINKY</option>
+			<option value="BLITZ">BLITZ</option>
+			<option value="BRIX">BRIX</option>
+			<option value="CONNECT4">CONNECT4</option>
+			<option value="GUESS">GUESS</option>
+			<option value="HIDDEN">HIDDEN</option>
+			<option value="INVADERS">INVADERS</option>
+			<option value="KALEID">KALEID</option>
+			<option value="MAZE">MAZE</option>
+			<option value="MERLIN">MERLIN</option>
+			<option value="MISSILE">MISSILE</option>
 			<option value="Maze (alt) [David Winter, 199x].ch8">Maze (alt) [David Winter, 199x].ch8</option>
 			<option value="Maze [David Winter, 199x].ch8">Maze [David Winter, 199x].ch8</option>
+			<option value="PONG">PONG</option>
+			<option value="PONG2">PONG2</option>
+			<option value="PUZZLE">PUZZLE</option>
 			<option value="Particle Demo [zeroZshadow, 2008].ch8">Particle Demo [zeroZshadow, 2008].ch8</option>
+			<option value="SYZYGY">SYZYGY</option>
 			<option value="Sierpinski [Sergey Naydenov, 2010].ch8">Sierpinski [Sergey Naydenov, 2010].ch8</option>
 			<option value="Sirpinski [Sergey Naydenov, 2010].ch8">Sirpinski [Sergey Naydenov, 2010].ch8</option>
 			<option value="Stars [Sergey Naydenov, 2010].ch8">Stars [Sergey Naydenov, 2010].ch8</option>
+			<option value="TANK">TANK</option>
+			<option value="TETRIS">TETRIS</option>
+			<option value="TICTAC">TICTAC</option>
 			<option value="Trip8 Demo (2008) [Revival Studios].ch8">Trip8 Demo (2008) [Revival Studios].ch8</option>
+			<option value="UFO">UFO</option>
+			<option value="VBRIX">VBRIX</option>
+			<option value="VERS">VERS</option>
+			<option value="WIPEOFF">WIPEOFF</option>
 			<option value="Zero Demo [zeroZshadow, 2007].ch8">Zero Demo [zeroZshadow, 2007].ch8</option>
 		</select>
 	<script src="./lib/main.js"></script>
