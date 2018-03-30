@@ -53,6 +53,7 @@ class CHIP8 {
 		this.keysPressed = new Map();
 		// ROMs start at this address
 		this.pc = 0x0200;
+		this.animationFlag = false;
 		window.cancelAnimationFrame(this.animationFrameRequest);
 	}
 
@@ -107,8 +108,9 @@ class CHIP8 {
 		}
 
 		// Animate every 10 steps.
-		if (steps-- == 0) {
-			steps = 1;
+		if (steps-- == 0 || this.animationFlag) {
+			steps = 10;
+			this.animationFlag = false;
 			this.animationFrameRequest = window.requestAnimationFrame(this.loop.bind(this));
 		} else {
 			this.loop();
@@ -352,6 +354,7 @@ class CHIP8 {
 				// Ex9E - SKP Vx
 				// Skip next instruction if key with the value of Vx is pressed.
 				if (this.keysPressed.has(this.V[X])) {
+					this.animationFlag = true;
 					this.pc += 2;
 				}
 				this.pc += 2;
@@ -387,6 +390,7 @@ class CHIP8 {
 					this.waitingKey = false;
 				}
 				this.V[X] = this.keysPressed.keys().next().value;
+				this.animationFlag = true;
 				this.pc += 2;
 				break;
 
@@ -519,6 +523,7 @@ class CHIP8 {
 				return;
 			}
 			this.keysPressed.delete(key.value);
+			this.animationFlag = true;
 			document.querySelector(`#key_${event.key}`).classList.remove("key-pressed");
 		});
 	}
