@@ -2,10 +2,9 @@
 JS implementation of a CHIP-8 emulator
 
 Live demo at http://fiaxhs.com/JShip-8
+Read about it https://blog.fiaxhs.com/chip-8-emulator-javascript/
 
 # TODO
 
-* Sound
-* Keys
 * Better screen (canvas/SVG)
-* Proper index.html :)
+* Fix keyboard input / speed
